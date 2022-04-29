@@ -1,0 +1,48 @@
+.category-container {
+  height: 240px;
+  min-width: 30%;
+  width: 300px;
+  margin: 10px 7.5px 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  img {
+    width: 100%;
+    height: 70%;
+    border-radius: 5px 5px 0 0;
+  }
+  .category-body-container {
+    .underline-effect {
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .underline-effect::after {
+      content: '';
+      position: absolute; // out of flex!!
+      left: 0;
+      bottom: 0;
+      transform: scaleX(0);
+      height: 2px;
+      width: 100%;
+      background-color: plum;
+      transform-origin: bottom right;
+      transition: transform 0.5s ease-out;
+    }
+    .underline-effect:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+}
