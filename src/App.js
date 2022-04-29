@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index></Route>
-          <Route path='/:category'></Route>
+          <Route path=':category'></Route>
         </Route>
       </Routes>
     </div>
