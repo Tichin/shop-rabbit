@@ -14,3 +14,10 @@ code {
 * {
   box-sizing: border-box;
 }
+
+a {
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1 solid gray;
+  border-radius: 5px;
+}

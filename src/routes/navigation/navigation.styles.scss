@@ -1,0 +1,18 @@
+.nav-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #sign-in-button {
+    padding-right: 5px;
+  }
+
+  #sign-up-button {
+    padding-left: 5px;
+  }
+}

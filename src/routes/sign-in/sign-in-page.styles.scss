@@ -1,0 +1,60 @@
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .left-container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e9e9;
+    text-align: center;
+    height: 350px;
+    margin-top: 50px;
+
+    h2 {
+      margin-top: 50px;
+    }
+
+    button {
+      width: 40%;
+      height: 10%;
+      margin: 30px auto 40px;
+      border-radius: 10px;
+      border: none;
+      background-image: linear-gradient(to bottom right, green, blue);
+      color: #e9e9e9;
+    }
+
+    .sign-in-with-google {
+      width: 80%;
+      background-color: red;
+      height: 50px;
+      margin: 30px auto 40px;
+      border-radius: 10px;
+    }
+  }
+
+  .right-container {
+    width: 400px;
+    background-color: #e9e9e9;
+    display: flex;
+    text-align: center;
+    height: 350px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+
+    .link-to {
+      text-decoration: none;
+      background-image: linear-gradient(to bottom right, green, blue);
+      width: 40%;
+      height: 40px;
+      color: #e9e9e9;
+      border-radius: 10px;
+      margin: 0 auto;
+      padding-top: 10px;
+    }
+  }
+}

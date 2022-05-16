@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -29,19 +37,57 @@ provider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const signIn = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
-export const createUserAuthDoc = async (user) => {
-  const userRef = doc(db, 'users', user.uid);
-  const userSnap = await getDoc(userRef);
-  const { displayName, email } = user;
+export const signUpWithEmailAndPassword = (email, password) => {
+  if (!email || !password) return;
+  createUserWithEmailAndPassword(auth, email, password);
+};
 
-  if (!userSnap.exists()) {
+export const signInAuthWithEmailAndPassword = (email, password) => {
+  if (!email || !password) return;
+  signInWithEmailAndPassword(auth, email, password);
+};
+
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
+  if (!userAuth) return;
+  const userDocRef = doc(db, 'users', userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
-      await setDoc(userRef, { displayName, email, createdAt });
-    } catch (err) {
-      console.log(err.message);
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalInformation,
+      });
+    } catch (error) {
+      console.log('error creating the user', error.message);
     }
   }
+  return userDocRef;
 };
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
+
+// Attach the observer using the onAuthStateChanged method. When a user successfully signs in, you can get information about the user in the observer.
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     const uid = user.uid;
+//     // ...
+//   } else {
+//     // User is signed out
+//     // ...
+//   }
+// });
